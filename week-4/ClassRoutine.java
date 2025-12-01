@@ -1,26 +1,30 @@
 import java.util.Scanner;
-class ClassRoutine{
-    public static void main(String[] args){
-        Scanner y=new Scanner(System.in);
-        System.out.println("Enter a Day:");
-        String Day=y.nextLine().toLowerCase();
-        switch (Day){
-            case "Sunday":
-                System.out.println("Today is Lecture!"); break;
-            case "Monday":
-                System.out.println("Today is Lecture!"); break;
-            case "Tuesday":
-                System.out.println("Today is Tutorial!"); break;
-            case "Wednasday":
-                System.out.println("Today is Tutorial!"); break;
-            case "Thursday":
-                System.out.println("Today is Workshop!"); break;
-            case "Friday":
-                System.out.println("Today is Workshop!"); break;
+public class ClassRoutine{
+    public static void main(String []args){
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter your day:");
+    String day = sc.nextLine();
+    switch(day) {
+        case "sunday":
+            System.out.print("Today is Lecture!"); break;
+        case "monday":
+            System.out.print("Today is Lecture!");break;
+        case "tuesday":
+            System.out.print("Today is Tutorial!");break;
+        case "wednesday":
+            System.out.print("Today is Tutorial!");break;
+        case "thursday":
+            System.out.print("Today is Workshop");break;
+        case "friday":
+            System.out.print("Today is Workshop");break;
+        case "saturday":
+            System.out.print("Today is Holyday");break;
             default:
-                System.out.println("Today is Holiday!"); break;
-        
-        }
+                System.out.print("Invalid day");
     }
     
-}
+}}
+    
+
+    
+    
