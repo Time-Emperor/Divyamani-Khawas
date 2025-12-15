@@ -32,3 +32,18 @@ class SimpleNumbers{
         }
         System.out.println("The lowest score in the array is: " + low);
         
+        System.out.println("Enter numbers of subjects scores you want to update: (1-5)");
+        
+        Scanner ex = new Scanner(System.in);
+        int n = ex.nextInt();
+        
+        for(int i = 0; i < n; i++){
+            System.out.print("Enter score for subject" + (i+1) + ": ");
+            scores[i] = ex.nextInt();
+        }
+        System.out.println("Updated scores: ");
+        for(int score : scores) {
+            System.out.print(score + " ");
+        }
+    }
+}
