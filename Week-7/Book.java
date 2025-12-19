@@ -13,16 +13,43 @@ class Book{
         this.genre=genre;
         this.availibilityStatus=availibilityStatus;
     }
+    public void display() {
+        System.out.printf("Title: | Author:| Year:| Available:", 
+            title, author, publicationYear, availibilityStatus);
+        } 
     public static void main(String[] args){
-        Book b1=new Book("Martial Peak","Momo","2445566795",2012,"Wuxia/Xianxia",false);
-        Book b2=new Book("Perfect World","Chen Dong","9787556204250",2013,"Action/Xianxia",true);
-        Book b3=new Book("Shadow Slave","Guiltythree","2465573795",2022,"Dark Fantasy",true);
+        Book bo1=new Book("Martial Peak","Momo","2445566795",2012,"Wuxia/Xianxia",false);
+        Book bo2=new Book("Perfect World","Chen Dong","9787556204250",2013,"Action/Xianxia",true);
+        Book bo3=new Book("Shadow Slave","Guiltythree","2465573795",2022,"Dark Fantasy",true);
         System.out.println("--------------------------------------------------------|");
-        System.out.println(b1.title+"|"+b1.author+"|"+b1.ISBN+"|"+b1.publicationYear+""+b1.genre);
+        System.out.println(bo1.title+"|"+bo1.author+"|"+bo1.ISBN+"|"+bo1.publicationYear+""+bo1.genre);
         System.out.println("--------------------------------------------------------|");
-        System.out.println(b2.title+"|"+b2.author+"|"+b2.ISBN+"|"+b2.publicationYear+""+b2.genre);
+        System.out.println(bo2.title+"|"+bo2.author+"|"+bo2.ISBN+"|"+bo2.publicationYear+""+bo2.genre);
         System.out.println("--------------------------------------------------------|");
-        System.out.println(b3.title+"|"+b3.author+"|"+b3.ISBN+"|"+b3.publicationYear+""+b3.genre);
+        System.out.println(bo3.title+"|"+bo3.author+"|"+bo3.ISBN+"|"+bo3.publicationYear+""+bo3.genre);
         System.out.println("--------------------------------------------------------|");
+        Book[] library = {bo1, bo2, bo3};
+         System.out.println("--- ALL BOOKS ---");
+        for (Book b : library) {
+            b.display();
+        }
+          System.out.println("\n--- AVAILABLE BOOKS ---");
+        for (Book b : library) {
+            if (b.availibilityStatus == true) {
+                b.display();
+            }
+        }
+          System.out.println("\n--- UNAVAILABLE BOOKS ---");
+        for (Book b : library) {
+            if (b.availibilityStatus == false) {
+                b.display();
+            }
+        }
+            System.out.println("\n--- AVAILABLE & NEWER THAN 2000 ---");
+        for (Book b : library) {
+            if (b.availibilityStatus == true && b.publicationYear > 2000) {
+                b.display();
+            }
+        }
     }
 }
