@@ -14,8 +14,7 @@ class Book{
         this.availibilityStatus=availibilityStatus;
     }
     public void display() {
-        System.out.printf("Title: | Author:| Year:| Available:", 
-            title, author, publicationYear, availibilityStatus);
+        System.out.println("Title: " + title+ " |Author: " + author + " | Year: " + publicationYear + " | Available: " + availibilityStatus);
         } 
     public static void main(String[] args){
         Book bo1=new Book("Martial Peak","Momo","2445566795",2012,"Wuxia/Xianxia",false);
