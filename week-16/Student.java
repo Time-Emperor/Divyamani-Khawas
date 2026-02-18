@@ -68,15 +68,21 @@ public class Student { // class
     }
 
     // first characters
-    
-public String getNameInitials() {
-    String[] firstChar= name.split(" ");
-    String initialChar = "";
-    for (String s : firstChar) {
-        
+
+    public String getNameInitials() {
+        String[] firstChar = name.split(" ");
+        String initialChar = "";
+        for (String s : firstChar) {
+
             initialChar += s.charAt(0);
-        
+
+        }
+        return initialChar;
     }
-    return initialChar;
-}
+
+    public String toString() {
+        return String.format("format: %-22s | %2d | Grade %2d | %s",
+                name, age, grade, school);
+    }
+
 }
