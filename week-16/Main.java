@@ -10,5 +10,10 @@ public class Main {
                 "Anita Rai,17,ICK College,11,04-002222,981234",
                 "Deepak Shah,20,ICP College,12,01-00ABCDE,9867890123"
         };
+        // parse and print students
+        Student[] students = CensusProcessor.parseCSV(csvData);
+        for (Student s : students) {
+            System.out.println(s);
+        }
     }
 }
