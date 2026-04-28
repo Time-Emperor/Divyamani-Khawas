@@ -1,7 +1,6 @@
 public class BasicMembership extends Membership {
 
-    private int sessions; // number of remaining workout sessions for a basic membership and decreases
-                          // each time
+    private int sessions;
 
     public BasicMembership(String name, double fee, int duration, String type, int sessions) {
         super(name, fee, duration, type);
@@ -21,7 +20,6 @@ public class BasicMembership extends Membership {
         }
     }
 
-    // Override abstract method
     public String display() {
         return "Basic =  " + "Name : " +
                 getName() + ", Fee: " + getFee() +

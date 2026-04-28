@@ -1,4 +1,9 @@
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -87,6 +92,39 @@ public class GymGui {
         JButton clearButton=new JButton("Clear");
         clearButton.setBounds(400, 225, 150, 30);
         mainFrame.add(clearButton);
+        
+        JButton checkMembershipButton=new JButton("Check Membership");
+        checkMembershipButton.setBounds(400, 250, 150, 30);
+        mainFrame.add(checkMembershipButton);
+        
+
+        JButton exportButton=new JButton("Export");
+        exportButton.setBounds(450, 300, 150, 30);
+        mainFrame.add(exportButton);
+
+
+        exportButton.addActionListener(e->{
+            try(BufferedWriter bw=new BufferedWriter(new FileWriter("GYMPlan.txt"))) {
+                if (list.isEmpty()){
+                    JOptionPane.showMessageDialog(mainFrame,"ArrayList is Empty");
+                }
+                for (Membership m : list) {
+                    bw.write(m.display()+"\n");
+                }
+                JOptionPane.showMessageDialog(mainFrame,"Sucessfully Done");
+            } catch (IOException ea) {
+                System.out.println(ea);
+            }
+        }
+        );
+
+
+
+        JButton loadButton=new JButton("Load");
+        loadButton.setBounds(300, 300, 150, 30);
+        mainFrame.add(loadButton);
+         
+        
 
         JTextArea area= new JTextArea();
         JScrollPane displayArea = new JScrollPane(area);
@@ -95,22 +133,75 @@ public class GymGui {
         
         addBasicButton.addActionListener(e ->{
             String name= nameField.getText();
+            if(!name.matches("[a-zA-Z]+")){
+                JOptionPane.showMessageDialog(mainFrame, "Invalid Input", "Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             double fee=Double.parseDouble(feeField.getText());
+            String tempFee=(String)(feeField.getText());
+            if(!tempFee.matches("\\d+")){
+                    JOptionPane.showMessageDialog(mainFrame,"Invalid fee Input","Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             int duration = Integer.parseInt(durationField.getText());
+            String tempDuration=(String)(durationField.getText());
+            
+                if(!tempDuration.matches("\\d+")){
+                    JOptionPane.showMessageDialog(mainFrame,"Invalid Input","Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
             String type = (String)typeComboBox.getSelectedItem();
             
+            
+
             BasicMembership basic=new BasicMembership(name, fee, duration, type, duration);
             list.add(basic);
 
             JOptionPane.showMessageDialog(mainFrame, "Name: "+basic.getName()+"\nFee: "+basic.getFee()+"\nType: "+basic.getType()+"\nDuration: "+basic.getDuration());
         });
+
+        addPremiumButton.addActionListener(e ->{
+            String name= nameField.getText();
+            double fee=Double.parseDouble(feeField.getText());
+            int duration = Integer.parseInt(durationField.getText());
+            String type = (String)typeComboBox.getSelectedItem();
+            int trainerSlots=Integer.parseInt(trainerSlotField.getText());
+            
+            PremiumMembership premium=new PremiumMembership(name, fee, duration, type, trainerSlots);
+            list.add(premium);
+
+            JOptionPane.showMessageDialog(mainFrame, "Name: "+premium.getName()+"\nFee: "+premium.getFee()+"\nType: "+premium.getType()+"\nDuration: "+premium.getDuration()+"\nTrainer Slots:"+premium.getTrainerSlot());
+        });
         
+        checkMembershipButton.addActionListener(e->{
+            int index=Integer.parseInt(indexField.getText());
+            Membership m=list.get(index);
+            String plan=(m instanceof BasicMembership)? "Basic Membership":
+                        (m instanceof PremiumMembership)? "Premium Membership":"No Type";
+            JOptionPane.showMessageDialog(mainFrame, "Type is:"+plan);
+                    });
+
         displayButton.addActionListener(e->{
             area.setText("");
 
             for (int i = 0; i < list.size(); i++) {
                 area.append(i+list.get(i).display()+"\n");
             }
+        });
+
+
+
+
+
+        clearButton.addActionListener(e->{
+            nameField.setText("");
+            feeField.setText("");
+            durationField.setText("");
+            sessionField.setText("");
+            typeComboBox.setSelectedItem(null);
+            trainerSlotField.setText("");
         });
 
          mainFrame.setVisible(true);
