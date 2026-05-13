@@ -12,15 +12,16 @@
  * @author (Divyamani Khawas)
  * 
  */
+
 import java.io.Serializable;
 
 public abstract class AIModel implements Serializable {
     private String modelName;
     private double price;
     private int parameterCount;
-    private int contextWindow;
+    private String contextWindow;
 
-    public AIModel(String modelName, double price, int parameterCount, int contextWindow) {
+    public AIModel(String modelName, double price, int parameterCount, String contextWindow) {
         this.modelName = modelName;
         this.price = price;
         this.parameterCount = parameterCount;
@@ -39,23 +40,15 @@ public abstract class AIModel implements Serializable {
         return parameterCount;
     }
 
-    public int getContextWindow() {
+    public String getContextWindow() {
         return contextWindow;
-    }
-
-    public int calculateTokens(String prompt) {
-        if (prompt == null || prompt.isEmpty()) {
-            return 0;
-        }
-        String[] tokens = prompt.split("\\s+");
-        return tokens.length;
     }
 
     public String display() {
         return "Model Name: " + modelName +
                 "\nPrice: " + price + " NPR per 1 Lakh tokens" +
                 "\nParameter Count: " + parameterCount + "B" +
-                "\nContext Window: " + contextWindow + "tokens";
+                "\nContext Window: " + contextWindow + " tokens";
     }
 
     public abstract String enterPrompt(String prompt, int tokens);
